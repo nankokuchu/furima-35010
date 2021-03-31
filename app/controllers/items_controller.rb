@@ -15,6 +15,7 @@ class ItemsController < ApplicationController
     else
       render :new
     end
+  end
 
   private
 
@@ -23,5 +24,4 @@ class ItemsController < ApplicationController
       :days_to_ship_id, :items_status_id, :category_id).merge(user_id: current_user.id)
     end
 
-  end
 end
