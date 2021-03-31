@@ -4,17 +4,9 @@ class Item < ApplicationRecord
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :shipping_cost
-
-  extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
-
-  extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :days_to_ship
-
-  extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :items_status
-
-  extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :prefecture
 
   with_options presence: true do

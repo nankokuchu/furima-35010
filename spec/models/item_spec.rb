@@ -35,20 +35,32 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end
 
-      it 'priceが半角数値であれば登録できないこと' do
+      it 'priceが価格は半角英数混合では登録できないこと' do
+        @item.price = '1a'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number", "Price is not included in the list")
+      end
+
+      it '価格は半角英語だけでは登録できないこと' do
+        @item.price = 'aa'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number", "Price is not included in the list")
+      end
+
+      it 'priceが全角数値であれば登録できないこと' do
         @item.price = '８８８'
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is not a number")
       end
 
       it 'priceが300以下であれば登録できないこと' do
-        @item.price = '100'
+        @item.price = '299'
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is not included in the list")
       end
 
       it 'priceが9999999であれば登録できないこと' do
-        @item.price = '99999999'
+        @item.price = '10000000'
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is not included in the list")
       end
@@ -99,6 +111,36 @@ RSpec.describe Item, type: :model do
         @item.image = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Image can't be blank")
+      end
+
+      it 'shipping_cost_idは0だと登録できない。' do
+        @item.shipping_cost_id = '0'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Shipping cost can't be blank")
+      end
+
+      it 'items_status_idは0だと登録できない。' do
+        @item.items_status_id = '0'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Items status can't be blank")
+      end      
+      
+      it 'days_to_ship_idは0だと登録できない。' do
+        @item.days_to_ship_id = '0'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Days to ship can't be blank")
+      end
+
+      it 'category_idは0だと登録できない。' do
+        @item.category_id = '0'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category can't be blank")
+      end
+
+      it 'prefecture_idは0だと登録できない。' do
+        @item.prefecture_id = '0'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Prefecture can't be blank")
       end
     end
   end
