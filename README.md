@@ -4,7 +4,7 @@
 
 |Column              |Type   |Options                  |
 |--------------------|-------|-------------------------|
-|email               |sting  |null: false, unique: true|
+|email         　　　 |sting  |null: false, unique: true|
 |encrypted_password  |sting  |null: false              |
 |nickname            |sting  |null: false              |
 |first_name          |sting  |null: false              |
