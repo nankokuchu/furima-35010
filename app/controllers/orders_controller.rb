@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!, only: [:new]
+
   def new
     @item = Item.find(params[:item_id])
     @order_address = OrderAddress.new
