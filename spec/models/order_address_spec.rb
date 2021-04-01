@@ -20,8 +20,13 @@ RSpec.describe Item, type: :model do
         expect(@order_address).to be_valid
       end
 
-      it 'phone_numberは11桁以内の数値のみであれば保存できること' do
-        @order_address.phone_number = "1235678"
+      it 'phone_numberは11桁数値のみであれば保存できること' do
+        @order_address.phone_number = "09012345678"
+        expect(@order_address).to be_valid
+      end
+
+      it 'building_nameが空でも登録できること' do
+        @order_address.building_name = ""
         expect(@order_address).to be_valid
       end
     end
@@ -68,6 +73,24 @@ RSpec.describe Item, type: :model do
         @order_address.phone_number = ''
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Phone number can't be blank")
+      end
+
+      it 'phone_numberが半角数字のみでないと登録できないこと' do
+        @order_address.phone_number = 'あああああああああああ'
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Phone number is invalid")
+      end
+
+      it 'phone_numberが全角数字だと登録できないこと' do
+        @order_address.phone_number = '０９０１２３４５６７８'
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Phone number is invalid")
+      end
+
+      it 'phone_numberが12桁以上だと登録できないこと' do
+        @order_address.phone_number = '090123456789'
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Phone number is invalid")
       end
       
       it 'tokenが空だと登録できないこと' do

@@ -4,6 +4,7 @@ RSpec.describe Item, type: :model do
   describe '#create' do
     before do
       @item = FactoryBot.build(:item)
+      sleep 1
     end
 
     context '商品登録できる' do
@@ -48,7 +49,7 @@ RSpec.describe Item, type: :model do
       end
 
       it 'priceが全角数値であれば登録できないこと' do
-        @item.price = ８８８
+        @item.price = "８８８"
         @item.valid?
         expect(@item.errors.full_messages).to include('Price is not a number')
       end
