@@ -49,7 +49,7 @@ RSpec.describe Item, type: :model do
       end
 
       it 'priceが全角数値であれば登録できないこと' do
-        @item.price = "８８８"
+        @item.price = '８８８'
         @item.valid?
         expect(@item.errors.full_messages).to include('Price is not a number')
       end
