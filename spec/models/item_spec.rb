@@ -38,31 +38,31 @@ RSpec.describe Item, type: :model do
       it 'priceが価格は半角英数混合では登録できないこと' do
         @item.price = '1a'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number", "Price is not included in the list")
+        expect(@item.errors.full_messages).to include('Price is not a number', 'Price is not included in the list')
       end
 
       it '価格は半角英語だけでは登録できないこと' do
         @item.price = 'aa'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number", "Price is not included in the list")
+        expect(@item.errors.full_messages).to include('Price is not a number', 'Price is not included in the list')
       end
 
       it 'priceが全角数値であれば登録できないこと' do
         @item.price = ８８８
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
 
       it 'priceが300以下であれば登録できないこと' do
         @item.price = 299
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not included in the list")
+        expect(@item.errors.full_messages).to include('Price is not included in the list')
       end
 
       it 'priceが9999999であれば登録できないこと' do
-        @item.price = 10000000
+        @item.price = 10_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not included in the list")
+        expect(@item.errors.full_messages).to include('Price is not included in the list')
       end
 
       it 'descriptionが空であれば登録できないこと' do
@@ -104,7 +104,7 @@ RSpec.describe Item, type: :model do
       it 'userテーブルと紐ついていないと登録できないこと' do
         @item.user = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("User must exist")
+        expect(@item.errors.full_messages).to include('User must exist')
       end
 
       it 'imageが空であれば登録できないこと' do
@@ -123,8 +123,8 @@ RSpec.describe Item, type: :model do
         @item.items_status_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include("Items status can't be blank")
-      end      
-      
+      end
+
       it 'days_to_ship_idは0だと登録できない。' do
         @item.days_to_ship_id = 0
         @item.valid?
@@ -145,4 +145,3 @@ RSpec.describe Item, type: :model do
     end
   end
 end
-
