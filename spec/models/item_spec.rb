@@ -48,19 +48,19 @@ RSpec.describe Item, type: :model do
       end
 
       it 'priceが全角数値であれば登録できないこと' do
-        @item.price = '８８８'
+        @item.price = ８８８
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is not a number")
       end
 
       it 'priceが300以下であれば登録できないこと' do
-        @item.price = '299'
+        @item.price = 299
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is not included in the list")
       end
 
       it 'priceが9999999であれば登録できないこと' do
-        @item.price = '10000000'
+        @item.price = 10000000
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is not included in the list")
       end
@@ -114,31 +114,31 @@ RSpec.describe Item, type: :model do
       end
 
       it 'shipping_cost_idは0だと登録できない。' do
-        @item.shipping_cost_id = '0'
+        @item.shipping_cost_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include("Shipping cost can't be blank")
       end
 
       it 'items_status_idは0だと登録できない。' do
-        @item.items_status_id = '0'
+        @item.items_status_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include("Items status can't be blank")
       end      
       
       it 'days_to_ship_idは0だと登録できない。' do
-        @item.days_to_ship_id = '0'
+        @item.days_to_ship_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include("Days to ship can't be blank")
       end
 
       it 'category_idは0だと登録できない。' do
-        @item.category_id = '0'
+        @item.category_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end
 
       it 'prefecture_idは0だと登録できない。' do
-        @item.prefecture_id = '0'
+        @item.prefecture_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include("Prefecture can't be blank")
       end
